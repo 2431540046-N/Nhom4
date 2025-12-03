@@ -255,7 +255,7 @@ function CapNhatGioHang($id_chi_tiet, $so_luong_moi) {
                 ctg.so_luong, 
                 ctg.ngay_nhan, 
                 ctg.ngay_tra, 
-                p.gia -- Lấy giá phòng hiện tại
+                p.gia 
             FROM chi_tiet_gio_hang ctg
             JOIN phong p ON ctg.id_phong = p.id_phong
             WHERE ctg.id_gio_hang = $id_gio_hang
@@ -306,7 +306,7 @@ function LayTatCaDanhSachGioHang() {
         JOIN 
             loai_phong lp ON p.id_loai = lp.id_loai
         WHERE 
-            gh.trang_thai = 'open'  -- Chỉ lấy các giỏ hàng đang hoạt động
+            gh.trang_thai = 'open' 
         ORDER BY 
             kh.ho_ten, ctg.ngay_nhan, ctg.id_chi_tiet
     ";
@@ -574,3 +574,4 @@ function ThemChiTietDatPhong($id_dat, $id_phong, $ngay_nhan, $ngay_tra, $gia, $s
 
 
 ?>
+
