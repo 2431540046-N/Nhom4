@@ -26,7 +26,6 @@ if ($id_dat <= 0) {
 $don_hang = $db->LayThongTinDonHang($id_dat, $id_khach); 
 
 if (!$don_hang) {
-    // Nếu không tìm thấy đơn hàng hoặc không đúng ID khách
     $_SESSION['thong_bao_loi'] = "Không tìm thấy hóa đơn hoặc bạn không có quyền truy cập.";
     header("Location: trang_chu.php"); 
     exit;
@@ -76,3 +75,4 @@ if (!$don_hang) {
 </body>
 
 </html>
+
