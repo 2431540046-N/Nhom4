@@ -3,14 +3,12 @@ include 'DbAdmin.php';
 $db = new DbAdmin();
 session_start();
 
-// --- 1. LẤY VÀ XÓA THÔNG BÁO THÀNH CÔNG TỪ SESSION ---
 $thong_bao_dat_phong = ""; 
 if (isset($_SESSION['thong_bao_dat_phong'])) {
     $thong_bao_dat_phong = $_SESSION['thong_bao_dat_phong'];
     unset($_SESSION['thong_bao_dat_phong']); 
 }
 
-// --- 2. KIỂM TRA ĐĂNG NHẬP VÀ LẤY ID ---
 if (!isset($_SESSION['khach'])) {
     $_SESSION['thong_bao_loi'] = "Vui lòng đăng nhập để xem hóa đơn.";
     header("Location: dangnhap.php");
@@ -25,7 +23,6 @@ if ($id_dat <= 0) {
     exit;
 }
 
-// --- 3. LẤY DỮ LIỆU ĐƠN HÀNG TỪ CSDL ---
 $don_hang = $db->LayThongTinDonHang($id_dat, $id_khach); 
 
 if (!$don_hang) {
@@ -77,4 +74,5 @@ if (!$don_hang) {
         </p>
     </div>
 </body>
+
 </html>
