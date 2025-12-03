@@ -22,7 +22,6 @@ if (empty($gio_hang)) {
 }
 
 foreach ($gio_hang as $item) {
-    // Hàm tinhSoDem phải được định nghĩa trong DbAdmin.php
     $so_dem = $db->tinhSoDem($item['ngay_nhan'], $item['ngay_tra']); 
     $thanh_tien = $item['gia'] * $so_dem * $item['so_luong'];
     $tong_tien += $thanh_tien;
@@ -39,12 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_dat = $db->TaoDonDatPhong($id_khach, $phuong_thuc_thanh_toan, $tong_tien, $ghi_chu); 
         
         if ($id_dat > 0) {
-            // ✅ THÀNH CÔNG: Chuyển hướng kèm ID đơn hàng
             $_SESSION['thong_bao_dat_phong'] = "<div class='success-msg'>🎉 Đặt phòng thành công!</div>";
             header("Location: hoa_don.php?id=" . $id_dat); 
             exit;
         } else {
-            // ❌ THẤT BẠI: Chuyển về giỏ hàng
             $_SESSION['thong_bao_loi'] = "Đặt phòng thất bại. Vui lòng kiểm tra lại giỏ hàng và kết nối CSDL.";
             header("Location: gio_hang.php"); 
             exit;
@@ -134,3 +131,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+
