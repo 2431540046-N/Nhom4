@@ -3,7 +3,6 @@ include 'DbAdmin.php';
 $db = new DbAdmin();
 session_start();
 
-// --- 1. KIỂM TRA ĐĂNG NHẬP ---
 if (!isset($_SESSION['khach'])) {
     $_SESSION['thong_bao_loi'] = "Vui lòng đăng nhập để tiến hành thanh toán.";
     header("Location: dangnhap.php");
@@ -14,7 +13,6 @@ $khach_hien_tai = $_SESSION['khach'];
 $id_khach = $khach_hien_tai['id_khach'];
 $tong_tien = 0; 
 
-// Lấy danh sách phòng từ giỏ hàng
 $gio_hang = $db->LayDanhSachGioHang($id_khach);
 
 if (empty($gio_hang)) {
@@ -23,7 +21,6 @@ if (empty($gio_hang)) {
     exit;
 }
 
-// Tính toán Tổng tiền
 foreach ($gio_hang as $item) {
     // Hàm tinhSoDem phải được định nghĩa trong DbAdmin.php
     $so_dem = $db->tinhSoDem($item['ngay_nhan'], $item['ngay_tra']); 
@@ -31,20 +28,16 @@ foreach ($gio_hang as $item) {
     $tong_tien += $thanh_tien;
 }
 
-// Khối lệnh xử lý POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_POST['dat_phong_ngay'])) {
         $phuong_thuc_thanh_toan = $_POST['phuong_thuc_tt'] ?? 'Thanh toán tại quầy'; 
         $ghi_chu = $_POST['ghi_chu'] ?? '';
         
-        // Khởi tạo biến $id_dat trước khi dùng (Tránh lỗi Undefined variable)
         $id_dat = 0; 
         
-        // Gọi hàm tạo đơn hàng đã được sửa lỗi CSDL
         $id_dat = $db->TaoDonDatPhong($id_khach, $phuong_thuc_thanh_toan, $tong_tien, $ghi_chu); 
         
-        // Kiểm tra kết quả tạo đơn hàng
         if ($id_dat > 0) {
             // ✅ THÀNH CÔNG: Chuyển hướng kèm ID đơn hàng
             $_SESSION['thong_bao_dat_phong'] = "<div class='success-msg'>🎉 Đặt phòng thành công!</div>";
@@ -139,4 +132,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </body>
+
 </html>
