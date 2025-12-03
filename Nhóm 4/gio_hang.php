@@ -13,11 +13,11 @@ $id_khach = $khach_hien_tai['id_khach'];
 $ten_khach = ($khach_hien_tai['ho_ten'] ?? $khach_hien_tai['email']);
 $thong_bao = "";
 
-// ---  XỬ LÝ CÁC THAO TÁC (Cập nhật hoặc Xóa) ---
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_chi_tiet = (int)($_POST['id_chi_tiet'] ?? 0); 
 
-    // LOGIC CẬP NHẬT NGÀY THÁNG
+   
     if (isset($_POST['cap_nhat_chi_tiet']) && $id_chi_tiet > 0) {
         
         $ngay_nhan_moi = $_POST['ngay_nhan_moi'] ?? '';
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
         
-    //  XÓA PHÒNG
+  
     if (isset($_POST['xoa_phong']) && $id_chi_tiet > 0) {
 
         if ($db->XoaPhongKhoiGioHang($id_chi_tiet)) { 
@@ -500,4 +500,5 @@ if (!empty($danh_sach_gio_hang)) {
         });
     </script>
 </body>
+
 </html>
