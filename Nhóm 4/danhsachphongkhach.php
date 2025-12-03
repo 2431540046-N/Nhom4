@@ -23,7 +23,6 @@ $check_out_date = $_GET['check_out'] ?? date('Y-m-d', strtotime('+1 day'));
 
 $so_khach = $_GET['so_khach'] ?? 1;
 
-// - XỬ LÝ THÊM VÀO GIỎ HÀNG ---
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['them_gio_hang'])) {
 
@@ -166,5 +165,6 @@ $danh_sach_phong = $db->LayDanhSachPhongTrong($check_in_date, $check_out_date, $
     </div>
 
 </body>
+
 
 </html>
