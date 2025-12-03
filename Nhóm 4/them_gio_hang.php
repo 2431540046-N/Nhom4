@@ -1,5 +1,4 @@
 <?php
-// Bắt buộc phải có file kết nối và các hàm xử lý Database
 include 'DbAdmin.php'; 
 $db = new DbAdmin();
 session_start();
@@ -51,3 +50,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
+
